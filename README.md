@@ -1,5 +1,5 @@
 # Capstone Project: Tensorflow Chessboard Image to FEN 
-Finished Web Application [web app](https://share.streamlit.io/dennisstoli/chessboardtofen/main/board_to_fen.py)
+Finished [Web Application](https://share.streamlit.io/dennisstoli/chessboardtofen/main/board_to_fen.py)
 
 ## Problem Statement
    
