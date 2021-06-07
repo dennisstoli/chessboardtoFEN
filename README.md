@@ -36,7 +36,7 @@ We run predictions on our test image and find that our model has an accuracy of 
 
 [Code](0_image_to_FEN_CNN.ipynb)
 
-[Neural Network Visual](images/model_viz.png)
+[Neural Network Visual](Images/model_viz.png)
 
 [Streamlit Application](board_to_fen.py)
 
