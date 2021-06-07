@@ -109,3 +109,5 @@ I believe I can generate an application that can predict the FEN's of more image
 To fix the third issue, I would have to find more images of chess/boards with 'abstract pieces', although those aren't too widely used as they are often difficult to interpret initially.
 
 In the future, it would be interesting to apply a similar approach to real-life pictures of chess boards. Instead of uploading images of computerized chess boards, I would develop a model that can read physical chess boards and return a computerized one and its position in FEN.
+
+Currently, I'm adding a chess engine into the application that looks for a checkmate (if there is one). The code can be found commented in the [Streamlit Application](board_to_fen.py).
