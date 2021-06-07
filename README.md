@@ -1,4 +1,4 @@
-# Capstone Project: Tensorflow Chessboard Image to FEN
+# Capstone Project: Using Tensorflow to convert a Chessboard Image to FEN, and creating a [web app](https://share.streamlit.io/dennisstoli/chessboardtofen/main/board_to_fen.py)
 
 ## Problem Statement
    
