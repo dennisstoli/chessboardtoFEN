@@ -1,79 +1,110 @@
-Capstone Project: Tensorflow Chessboard Image to FEN
+# Capstone Project: Tensorflow Chessboard Image to FEN
 
-0) Problem Statement
+## Problem Statement
    
-Can we accurately predict a subreddit from a reddit post's title using classification modeling?
-We will use Naive Bayes and Logistic Regression as our clasifiers to develop our models.
-Sucess will be evaluated on our accuracy of predicting which post is from which subreddit.
-It's interesting to see if there are particular words/phrases that separate one subreddit from another, and if there is any commonality between them as well.
+Can we create a machine learning model to read an image of a chess board and convert it to the board's FEN?
+We will use Tensorflow Keras to develop our model.
+Success will be evaluated on our accuracy of predicting a chess board's FEN from an image of a chess board.
+It will be interesting to see how our final model recognizes different board states, colors, and piece variations.
 
-1) Executive Summary
+## Executive Summary
     
-I gathered/collected our subreddit data using api requests and pushshift, and built a function to collect data in sets of 100 to then place that data into a dataframe.
-I then concatenated the data together from each subreddit into one single dataframe. We were interested in the subreddits r/bitcoin and r/wallstreetbets, two subreddits focused on investing, but fairly different im pther aspects.
+I downloaded the chess board position images from Kaggle. 
+The dataset is described as: 
 
-After Data collection, we cleaned our data by tokenizing/lemmatizing our titles, engineering some additional features, removing duplicate titles, and removing null values. With our new clean titles, I created some visualizion and conducted proper EDA to better understand the data collected for proper model analysis in the future. We found from the visualizations that the subreddits are fairly evenly distributed in regards to title length, as well as the amount of unique users. We also found the words that appear the most frequently within each subreddit.
+100000 images of randomly generated chess positions of 5-15 pieces (2 kings and 3-13 pawns/pieces)
+Images were generated using 28 styles of chess boards and 32 styles of chess pieces totaling 896 board/piece style combinations.
 
-I preproccesed our subreddit Data, train-test-split our X and y variables, and created models such as Logistic Regression and Naive Bayes, for scoring and predicting both the Bitcoin and WallStreetBets Subreddits from our clean titles. Created visualizations of our modeled data and predictive variables, created a confusion matrix for analysis, analyzed coeficients and probabilites as well. Found that Naive Bayes gave us the best score, and was able to find the most predictive words for each subreddit, as well as the most predictive titles. 
+After proper imports, since the files were named after their FEN position, I extracted the FEN from the file name using a function. This will be used later for training our model. 
+
+We then created a function to convert a FEN into a matrix. The function first takes in a FEN (ex. R3q3-8-5k2-n7-8-3Q2pb-3K1P2-6N1) and converts it to a list of 64 variables (one for each square on a chess board) like so: ['R', '_', '_', '_', 'q', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'k', '_', '_', 'n', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'Q', '_', '_', 'p', 'b', '_', '_', '_', 'K', '_', 'P', '_', '_', '_', '_', '_', '_', '_', '_', 'N', '_']. The function continues and takes this list and converts it into a numpy array to be read by our model in the future.
+
+Now that we have a function to convert a FEN into a Matrix, we need a function to do the opposite.
+The process for this was a bit more complex, but the main idea was to transform the matrix into a list first, and then transform that list into a FEN string. Details can be found in the Jupyter Notebook.
+
+Now we required a function to process an image into a Numpy Array, this would be the x input variable in our model. The function converts an image into 64 individual squares (one for each square on a chess board) and returns a numpy array for that image. 
+
+With all the required functions for modeling, we built a train generator that processes an image (x-variable) and extracts the matrix from the corresponding FEN. We then created our Sequential model using Convolution, MaxPooling, and Dense layers. Our final Dense layer having its activation as 'softmax', since we are creating a multi-classification model. We compile the model and are looking for the model's accuracy and loss. Finally, we fit the model with our train generator and save it!
+
+We run predictions on our test image and find that our model has an accuracy of nearly 100%
 
 
 
-2) Table of Contents
 
-[Data Collection](code/01_Data_Collection.ipynb)
+## Table of Contents
 
-[Data Cleaning and EDA](code/02_Data_Cleaning_and_EDA.ipynb)
 
-[Preprocessing and Modeling](code/03_Preprocessing_Modeling.ipynb)
+[Code](0_image_to_FEN_CNN.ipynb)
 
-[Bitcoin Data](data/btc.csv) 
+[Neural Network Visual](images/model_viz.png)
 
-[WallStreetBets Data](data/wsb.csv) 
+[Streamlit Application](board_to_fen.py)
 
-[Compiled Subreddit Data](data/compiled_subreddit_data.csv)
+[Functions for Streamlit](functions.py)
 
-[Cleaned/Final Data](data/clean_data.csv)
+[Streamlit Load Model](load_model.py) 
 
-[Presentation](presentation/Reddit_Presentation.pdf)
+[Final Model](model.h5) 
+
+[Requirements](requirements.txt)
+
    
-3) Data and Data Dictionary
+## Data and Data Dictionary
 
-DESCRIPTIVE ABSTRACT: Data set contains public information from the website reddit.com, where individuals can anonymously post on any subject.
+DESCRIPTIVE ABSTRACT: Dataset contains images uploaded to the website https://www.kaggle.com, where individuals can upload datasets for others to use.
 
 SOURCES: 
-https://reddit.com/r/bitcoin , https://reddit.com/r/wallstreetbets
+https://www.kaggle.com/koryakinp/chess-positions
 
-|Feature|Type|Dataset|Description|
-|---|---|---|---|
-|**subreddit**|*object*|subreddit_df|The subreddit that the post was created in. (i.e. bitcoin)
-|**title**|*object*|subreddit_df|The original title taken from the post. (i.e. GME to the moon!) 
-|**author**|*object*|subreddit_df|The author's username who made the post.
-|**title_length**|*int*|subreddit_df|The length of the title (in characters, spaces included)
-|**title_word_count**|*int*|subreddit_df|The word count of the title.
-|**clean_title**|*object*|subreddit_df|The clean titles created from the original titles, removing emojis, capitalization, formatting, spacing, etc.
+CONTENT:
 
-4) Conclusions and Recommendation
+100000 images of randomly generated chess positions of 5-15 pieces (2 kings and 3-13 pawns/pieces)
+Images were generated using 28 styles of chess boards and 32 styles of chess pieces totaling 896 board/piece style combinations.
 
-We can accurately predict which subreddit a title is from with an accuracy over 85%, a great achievement.
-These subreddits are fairly similar, but with particular individual characteristics we are able to predict accurately.
-Through the process of cleaning our titles and predictive modeling, we did quite well.
+All images are 400 by 400 pixels.
 
-We notice that r/wallstreetbets has many keywords, such as GME, MVIS, AMC, yolo, ape, etc., these keywords on top of it's meme-y community act as a bit of a separation between r/bitcoin.
-r/bitcoin on the other hand is also an investing subreddit, but it's main focus is on bitcoin/btc rather than stocks, but also tends to quite meme-y. 
-Another interesting point is that these subreddits frequently refer to eachother and their communities, with many subscribers that are part of both communities. 
+Training set: 80000 images
+Test set: 20000 images
+Pieces were generated with the following probability distribution:
 
-r/bitcoin focuses more on investing/studying bitcoin, r/wallstreetbets focuses more on yoloing risky stocks and posting about them for internet points. The things that bring them together are: investing, money, memes, and humor.
+30% for Pawn
 
-If conducting a similar project with different subreddits, I would recommend gathering over 10,000 data entries and to clean the data very thoroughly. Use different modeling techniques as well to get the best accuracy possible.
+20% for Bishop
 
-5) Areas for Further Research/Study
+20% for Knight
 
-I believe I can generate even more accurate data if I were able to take every post from each subreddit since its inception efficiently. Currently I do not have the knowledge to do that quickly, and that would be very interesting to see the difference between that data and the data I gathered. Also, time periods are interesting as well, currently the stock mvis is a popular keyword in r/wallstreetsbets, but a year from now a different keyword will replace it, dividing the data by time periods and doing separate analysis in that way would be intriguing as well.
+20% for Rook
 
-In the future I would also recommend to try different types of models, possibly some boosting/KNN/tree to see what types of results those models bring. It would also be interesting to try out some other vectorizers outside of CountVectorizer and TfdifVectorizer.
+10% for Queen
 
-Exploring different ways to Tokenize/Lemmatize/Clean the data I'm sure would yield different and intersting results as well. (i.e. spacy)
+2 Kings are guaranteed to be on the board.
+
+Labels are in a filename in Forsyth–Edwards Notation format, but with dashes instead of slashes.
+
+## Conclusions and Recommendation
+
+We can accurately predict what the FEN of a chess board is with appropriate functions and a Machine Learning Model using Tensorflow Keras. We achieved an accuracy of nearly 100 %.
+
+We successfully converted an image into a matrix, a FEN into a Matrix, and a Matrix into a FEN, to create a Machine Learning Model that can read images and predict a FEN, accurately, from said images.
 
 
 
-# chessboardtoFEN
+## Areas for Further Research/Study
+
+After running my created model with different images in my streamlit application, I noticed a few issues.
+
+1.) The chess board needs to be resized into a 400 x 400 jpeg image to achieve best results.
+
+2.) The chess board image cannot have any background outside the 64 squares.
+
+3.) The chess board cannot have pieces that are too 'abstract'.
+
+I was able to fix the first issue by adding a resizing function in my application if required.
+
+The second issue I was able to fix IF the image background outside the 64 squares is uniform, and not too large. I simply created a cropping and resizing function in streamlit to achieve this, but backgrounds that are not so uniform would pose a problem.
+
+I believe I can generate an application that can predict the FEN's of more images if I were to create a function that can crop chess boards exactly to my liking every time. This would require another machine learning model/function that can detect chess squares and crop accordingly.
+
+To fix the third issue, I would have to find more images of chess/boards with 'abstract pieces', although those aren't too widely used as they are often difficult to interpret initially.
+
+In the future, it would be interesting to apply a similar approach to real-life pictures of chess boards. Instead of uploading images of computerized chess boards, I would develop a model that can read physical chess boards and return a computerized one and its position in FEN.
