@@ -49,7 +49,9 @@ We run predictions on our test image and find that our model has an accuracy of 
 
 [Requirements](requirements.txt)
 
-   
+[Presentation](presentation/capstone.pdf)
+
+
 ## Data and Data Dictionary
 
 DESCRIPTIVE ABSTRACT: Dataset contains images uploaded to the website https://www.kaggle.com, where individuals can upload datasets for others to use.
