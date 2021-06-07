@@ -4,7 +4,6 @@ import chess.engine
 import chess.pgn
 import chess.svg
 import base64
-from keras.preprocessing.image import load_img
 from tensorflow.python.keras.saving.save import load_model
 import pandas as pd
 import matplotlib.pyplot as plt
