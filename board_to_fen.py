@@ -12,7 +12,7 @@ from PIL import Image
 from functions import fen_from_matrix, process_image
 
 
-st.title('Chess Board Position Image to FEN Generator')
+st.title('Chess Board Image to FEN Generator')
 
 model = load_model('model.h5')
 
