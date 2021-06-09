@@ -25,7 +25,7 @@ try:
 
 
     st.image(resized_image) 
-    st.subheader('Download New Image and Upload Below')
+    st.write('Download New Image and Upload Below')
 
 except:
     pass
