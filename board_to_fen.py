@@ -25,7 +25,7 @@ try:
 
 
     st.image(resized_image) 
-    st.header('Download New Image and Upload Below')
+    st.header('Right Click, Download New Image and Upload Below')
 
 except:
     pass
