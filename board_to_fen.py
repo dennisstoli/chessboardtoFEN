@@ -25,7 +25,7 @@ try:
 
 
     st.image(resized_image) 
-    st.text('Download New Image and Upload Below')
+    st.write('Download New Image and Upload Below')
 
 except:
     pass
@@ -42,7 +42,7 @@ try:
 
     uploaded_fen = fen_from_matrix(np.round(model.predict(process_image(our_image))))
     uploaded_fen = uploaded_fen.replace('-', '/')
-    st.text(f'Predicted FEN: {uploaded_fen}')     
+    st.write(f'Predicted FEN: {uploaded_fen}')     
 
 except:
     pass
