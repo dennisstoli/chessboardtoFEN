@@ -42,7 +42,7 @@ try:
 
     uploaded_fen = fen_from_matrix(np.round(model.predict(process_image(our_image))))
     uploaded_fen = uploaded_fen.replace('-', '/')
-    st.write(f'Predicted FEN: {uploaded_fen}')     
+    st.header(f'Predicted FEN: {uploaded_fen}')     
 
 except:
     pass
