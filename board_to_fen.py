@@ -80,7 +80,7 @@ except:
 #             eval_list[i]['value'] = abs(eval_list[i]['value']) * -1
 
     
-#     widget_values = {}
+#     widget_values = {} #recording widget found in Streamlit Developer Forum
 #     def make_recording_widget(f):
 #         """Return a function that wraps a streamlit widget and records the
 #         widget's values to a global dictionary.
@@ -102,7 +102,7 @@ except:
 #         board.push(chess.Move.from_uci(move))
 
 
-#     def render_svg(svg):
+#     def render_svg(svg): #this function, also found in Streamlit Forums, renders SVG images, which chessboards in my program are!
 #         """Renders the given svg string."""
 #         b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
 #         html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
