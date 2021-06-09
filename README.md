@@ -25,7 +25,11 @@ The process for this was a bit more complex, but the main idea was to transform 
 
 Now we required a function to process an image into a Numpy Array, this would be the x input variable in our model. The function converts an image into 64 individual squares (one for each square on a chess board) and returns a numpy array for that image. 
 
-With all the required functions for modeling, we built a train generator that processes an image (x-variable) and extracts the matrix from the corresponding FEN. We then created our Sequential model using Convolution, MaxPooling, and Dense layers. Our final Dense layer having its activation as 'softmax', since we are creating a multi-classification model. We compile the model and are looking for the model's accuracy and loss. Finally, we fit the model with our train generator and save it!
+With all the required functions for modeling, we built a train generator that processes an image (x-variable) and extracts the matrix from the corresponding FEN. We then created our Sequential model using Convolution, MaxPooling, and Dense layers. Our final Dense layer having its activation as 'softmax', since we are creating a multi-classification model. 
+
+Images/model_viz.png
+
+We compile the model and are looking for the model's accuracy and loss. Finally, we fit the model with our train generator and save it!
 
 We run predictions on our test image and find that our model has an accuracy of nearly 100%
 
