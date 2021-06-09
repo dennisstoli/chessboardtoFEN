@@ -27,7 +27,8 @@ Now we required a function to process an image into a Numpy Array, this would be
 
 With all the required functions for modeling, we built a train generator that processes an image (x-variable) and extracts the matrix from the corresponding FEN. We then created our Sequential model using Convolution, MaxPooling, and Dense layers. Our final Dense layer having its activation as 'softmax', since we are creating a multi-classification model. 
 
-Images/model_viz.png
+![model](https://github.com/dennisstoli/chessboardtoFEN/blob/main/Images/model_viz.png)
+
 
 We compile the model and are looking for the model's accuracy and loss. Finally, we fit the model with our train generator and save it!
 
