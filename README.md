@@ -54,7 +54,7 @@ We run predictions on our test image and find that our model has an accuracy of 
 
 [Requirements](requirements.txt)
 
-[Presentation](presentation/capstone.pdf)
+[Presentation](presentation/capstonepresentation.pdf)
 
 
 ## Data and Data Dictionary
